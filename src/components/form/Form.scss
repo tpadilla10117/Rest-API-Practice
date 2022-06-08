@@ -1,0 +1,28 @@
+.todoform-parent-container {
+    border: 1px solid red;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    height: 200px;
+
+    .todoform-input {
+        width: 50%;
+        border: 2px solid grey;
+        border-radius: 5px;
+    }
+
+    .todoform-button {
+        padding: 10px;
+        border-radius: 5px;
+        letter-spacing: .5px;
+    }
+
+    .todoform-select-parent-container {
+
+        .todoform-select {
+            border: 1px solid grey;
+        }
+    }
+}

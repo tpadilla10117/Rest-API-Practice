@@ -1,0 +1,39 @@
+.todo-parent-container {
+    border: .5px solid grey;
+    border-radius: 5px;
+    display: flex;
+    width: 300px;
+    margin: 0 0 1rem 0;
+    height: 2.5rem;
+    align-items: center;
+
+    .todo-item {
+        list-style: none;
+        margin: 0 1rem 0 0;
+        text-decoration: none;
+        width: 80%;
+        padding: 0 0 0 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        &.completed {
+            text-decoration: line-through;
+        }
+    }
+
+    .todo-item-complete, .todo-item-delete {
+            padding: 0 .5rem 0 .5rem;
+            cursor: pointer;
+            height: 100%;
+            color: white;
+    }
+
+    .todo-item-complete {
+        background-color: #32CD32;
+    }
+
+    .todo-item-delete {
+        background-color: #FF0000;
+    }
+
+}
