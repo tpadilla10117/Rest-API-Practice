@@ -1,11 +1,20 @@
 import React from 'react'
 
-function PokeCards() {
+function PokeCards( { pokeData }) {
   return (
-    <div className='pokeCards-parent-container'>
-        PokeCards
+    <ul className='pokeCards-parent-container'>
+        {pokeData.map ( (pokemon, index) => {
+          return (
+            <li
+              key={index}
+              id={pokemon.id}
+            >
+              <img src={ pokemon.sprites.back_default } alt=''  />
+            </li>
+          )
+        })}
 
-    </div>
+    </ul>
   )
 }
 

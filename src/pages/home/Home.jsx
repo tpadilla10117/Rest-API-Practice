@@ -20,35 +20,35 @@ const HomePage = () => {
 
     const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
-    /* 'https://pokeapi.co/api/v2/pokemon/?limit=20' */
-    /* 'https://pokeapi.co/api/v2/pokemon/1' */
-
     const pokeQueryHandler = (event) => {
         setPokeQuery(event.target.value);
     };
 
-    const pokeQuerySubmitHandler = (event) => {
-        event.preventDefault();
-        console.log('clicked')
-    }
-
-    const fetchPokeData = async () => {
-        fetch(`${BASE_URL}1`)
+    const fetchPokeData = async (input) => {
+        fetch(`${BASE_URL}${pokeQuery}`)
         .then(result => result.json()
         .then(result => {
             let savedPokeData = JSON.stringify(result);
             localStorage.setItem('pokeData', savedPokeData);
-            setPokeData(result);
+            setPokeData([result]);
         }))
     };
+
+    const pokeQuerySubmitHandler = (event) => {
+        event.preventDefault();
+        fetchPokeData(pokeQuery);
+    }
+
+   
     /* fetchPokeData(); */
-    /* console.log('HEre is my pokeData: ', pokeData) */
+    console.log('HEre is my pokeData: ', pokeData)
 
 
     return (
         <main id="homepage-parent-container">
             <form className='searchbar-parent-container'>
                 <input
+                    type='text'
                     id='searchbar'
                     className='searchbar'
                     placeholder='Enter some text'
