@@ -1,21 +1,12 @@
-import { EnergySavingsLeafTwoTone, EventNoteTwoTone } from '@mui/icons-material';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     PokeCardList
 } from '../../components/utils';
 
 const HomePage = () => {
 
-    /* 
-        1) Call the api with a fetch / GET request
-        2) Save rreturned info in application state and local Storage
-            - if the state exists in localStorage, use that for app state
-            - else run an api call
-        3) Create a search bar
-            - Pending on result of search (which yields an API call), save results of user query to state and local storage
-    */
-
-    const [ pokeData, setPokeData ] = useState([]);
+    const pokeDataLocalStorage =  [JSON.parse(localStorage.getItem('pokeData')) ];
+    const [ pokeData, setPokeData ] = useState();
     const [ pokeQuery, setPokeQuery ] = useState('');
 
     const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
@@ -37,12 +28,8 @@ const HomePage = () => {
     const pokeQuerySubmitHandler = (event) => {
         event.preventDefault();
         fetchPokeData(pokeQuery);
+        setPokeQuery('');
     }
-
-   
-    /* fetchPokeData(); */
-    console.log('HEre is my pokeData: ', pokeData)
-
 
     return (
         <main id="homepage-parent-container">
@@ -69,6 +56,7 @@ const HomePage = () => {
             <PokeCardList 
                 pokeData={pokeData}
                 setPokeData={setPokeData}
+                pokeDataLocalStorage={pokeDataLocalStorage}
             />
             
 
