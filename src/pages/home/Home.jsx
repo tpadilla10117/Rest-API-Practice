@@ -1,72 +1,36 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import {
-    Form,
-    TodoList
-} from '../../components/utils.js';
+    PokeCardList
+} from '../../components/utils';
 
 const HomePage = () => {
 
-/* State for form inputs, todos, dropdown menu, and filtered todos:  */
-    const [ inputText, setInputText ] = useState('');
-    const [ todos, setTodos ] = useState([]);
-    const [ status, setStatus ] = useState('all'); 
-    const [ filteredTodoItems, setFilteredTodoItems ] = useState([]);
-
-/* Save Todos in LocalStorage: */
-
-    const retrieveTodosLocalStorage = () => {
-        if(localStorage.getItem('todos') === null) {
-            localStorage.setItem('todos', JSON.stringify([]) );
-        } else {
-            let todoLocal = JSON.parse(localStorage.getItem('todos'));
-            setTodos(todoLocal);
-        }
-    };
-
-/* Functions for filtering Todos: */
-
-    useEffect( () => {
-        retrieveTodosLocalStorage();
-    }, []);
-
-    useEffect( () => {
-
-        const filterHandler = () => {
-            if(status === 'completed') {
-                setFilteredTodoItems(todos.filter( todo => todo.completed === true ) );
-            } else if (status === 'uncompleted') {
-                setFilteredTodoItems(todos.filter( todo => todo.completed === false ) );
-            } else {
-                setFilteredTodoItems(todos);
-            }
-        };
-
-        const saveTodosLocalStorage = () => {
-            localStorage.setItem('todos', JSON.stringify(todos))
-        };
-
-        filterHandler();
-        saveTodosLocalStorage();
-
-    }, [todos, status]);
+    /* 
+        1) Call the api with a fetch / GET request
+        2) Save rreturned info in application state and local Storage
+            - if the state exists in localStorage, use that for app state
+            - else run an api call
+        3) Create a search bar
+            - Pending on result of search (which yields an API call), save results of user query to state and local storage
+    */
+   
 
     return (
         <main id="homepage-parent-container">
-    
-            <Form 
-                setInputText={setInputText} 
-                inputText={inputText}
-                todos={todos}
-                setTodos={setTodos}
-                status={status}
-                setStatus={setStatus}
+            <section className='searchbar-parent-container'>
+                <input
+                    id='searchbar'
+                    className='searchbar'
+                    placeholder='Enter some text'
+                />
+                <label htmlFor='searchbar'/>                
+            </section>
+
+            {/* TODO: PokecardList component to display Pokecards */}
+            <PokeCardList 
+            
             />
-            <TodoList 
-                todos={todos}
-                setTodos={setTodos}
-                filteredTodoItems={filteredTodoItems}
-            />
+            
 
         </main>
     );
