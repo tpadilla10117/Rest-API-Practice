@@ -1,8 +1,6 @@
 /* This file manages exported Components: */
 /* PAGES: */
 
-import { from } from 'form-data';
-
     
     export { default as Home } from '../pages/home/Home.jsx';
 
