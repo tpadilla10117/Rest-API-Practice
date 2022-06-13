@@ -4,23 +4,42 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 
-    input {
+    .form-steps {
+        display: flex;
+        flex-direction: column;
         width: 75%;
-        height: 20px;
-        border: 1px solid black;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
+        input {
+            width: 75%;
+            height: 20px;
+            border: 1px solid black;
+        }
+
+        button {
+            padding: 10px;
+            margin: 20px;
+            cursor: pointer;
+        }
     }
 
-    .form-documentType-parent-container {
+    .form-documentType-parent-container,
+    .form-documentCategory-parent-container {
         width: 75%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
 
-        .form-documentType {
+        .form-documentType,
+        .form-documentCategory {
 
-            .form-documentType-input {
+            .form-documentType-input,
+            .form-documentCategory-input {
                 cursor: pointer;
                 position: relative;
                 outline: none;
@@ -32,7 +51,8 @@
                 }
             }
 
-            .form-documentType-dropdownOptions {
+            .form-documentType-dropdownOptions,
+            .form-documentCategory-dropdownOptions {
 
                 display: none;
                 position: absolute;

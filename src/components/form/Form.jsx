@@ -1,11 +1,50 @@
 import React, { useState } from 'react';
+import {
+    ProgressBar
+} from '../utils';
 
 
-function Form(  ) {
+function Form() {
 
     const [ formNameState, setFormNameState ] = useState('');
     const [ formEmailState, setFormEmailState ] = useState('');
+    const [progressBarStatus, setProgressBarStatus ] = useState(0)
     const [ documentTypeDropdownActiveToggler, setdocumentTypeDropdownActiveToggler ] = useState(false);
+    const [ documentCategoryDropdownActiveToggler, setdocumentCategoryDropdownActiveToggler ] = useState(false);
+
+    const formSteps = document.querySelectorAll('.form-steps');
+    /* const nextButtons = document.querySelectorAll('.form-next-btn') */
+    let formStepsNum = 0;
+
+    const incrementBar = () => {
+
+        if(progressBarStatus !== 100) {
+            setProgressBarStatus(progressBarStatus + 25)
+        };
+        
+    };
+
+    const updateFormSteps = () => {
+        console.log('fired form update')
+        formSteps.forEach( (formstep) => {
+            console.log(formstep)
+            /* console.log(formstep.classList.contains('active')) */
+            formstep.classList.contains('active') &&
+            formstep.classList.remove('active')
+            formSteps[formStepsNum].classList.add('active');
+        })
+
+    };
+
+    const navigateSteps = (event) => {
+        event.preventDefault();
+        console.log('Here is my current Step: ', formStepsNum);
+        console.log('clicked')
+        incrementBar();
+        formStepsNum++;
+        updateFormSteps();
+    };
+
 
     const nameInputHandler = (event) => {
         setFormNameState(event.target.value)
@@ -18,13 +57,24 @@ function Form(  ) {
     const documentTypeShowDropdownOptionsHandler = () => {
         setdocumentTypeDropdownActiveToggler(!documentTypeDropdownActiveToggler);
     };
-    console.log(documentTypeDropdownActiveToggler)
+
+    const documentCategoryShowDropdownOptionsHandler = () => {
+        setdocumentCategoryDropdownActiveToggler(!documentCategoryDropdownActiveToggler);
+    };
 
     /* Selects value from the dropdown: */
     const revealItems = (text) => {
     
         if(text !== null || text !== '') {
           document.querySelector('.form-documentType-input').value = text;
+        };
+        
+    };
+
+    const revealCategoryItems = (text) => {
+    
+        if(text !== null || text !== '') {
+          document.querySelector('.form-documentCategory-input').value = text;
         };
         
     };
@@ -47,78 +97,172 @@ function Form(  ) {
             name: 'Legal Doc'
         },
     ];
+    let documentCategoryItems = [
+        {
+            id: 1,
+            name: 'Business Doc'
+        },
+        {
+            id: 2,
+            name: 'Sales Doc'
+        },
+        {
+            id: 3,
+            name: 'Medical Doc'
+        },
+        {
+            id: 4,
+            name: 'Legal Doc'
+        },
+    ];
    
     return (
-        <form className='form-parent-container'>
-            <input
-                id='form-name'
-                className='form-name'
-                type='text'
-                minLength='2'
-                maxLength='32'
-                placeholder='Enter Your Name...'
-                value={formNameState}
-                onChange={nameInputHandler}
-            />
-            <label 
-                htmlFor='form-name'
+        <section>
+            <ProgressBar 
+                complete={progressBarStatus}
+                setComplete={setProgressBarStatus}
+                incrementBar={incrementBar}
             />
 
-            <div 
-                className='form-documentType-parent-container'
-                onClick={documentTypeShowDropdownOptionsHandler}
-            >
-                <h3>Select Type of Document...</h3>
-                <div className='form-documentType'>
+            <form className='form-parent-container'>
+                <div className={`form-steps active`}>
 
-                    <input 
-                        placeholder='Select Size...'
-                        className='form-documentType-input'
-                        id='form-documentType-input'
-                        readOnly
+                    <input
+                        id='form-name'
+                        className='form-name'
+                        type='text'
+                        minLength='2'
+                        maxLength='32'
+                        placeholder='Enter Your Name...'
+                        value={formNameState}
+                        onChange={nameInputHandler}
                     />
                     <label 
-                        htmlFor='form-documentType-input'
+                        htmlFor='form-name'
                     />
-                    <ul className={documentTypeDropdownActiveToggler ? 'form-documentType-dropdownOptions active' : 'form-documentType-dropdownOptions'}>
-                        {documentTypeItems.map( (items, index) => {
-                            return (
-                                <li 
-                                    key={index}
-                                    id={items.id}
-                                    className={items.id}
-                                    onClick={ () => revealItems(items.name)}
-                                >
-                                    {items.name}
-                                </li>
-                            )
-                        })}
 
-                    </ul>
+                    <button
+                        onClick={navigateSteps}
+                        className='form-next-btn'
+                    >
+                        Next
+                    </button>
+
                 </div>
-            </div>
-           
+                
+                <div className='form-steps'>
 
-            <input />
-            <label />
+                    <div 
+                        className='form-documentType-parent-container'
+                        onClick={documentTypeShowDropdownOptionsHandler}
+                    >
+                        <h3>Select Type of Document...</h3>
+                        <div className='form-documentType'>
 
-            <input 
-                id='form-email'
-                className='form-email'
-                type='email'
-                maxLength='128'
-                placeholder='Enter Your Email...'
-                value={formEmailState}
-                onChange={emailInputHandler}
-            />
-            <label 
-                htmlFor='form-email'
-            />
+                            <input 
+                                placeholder='Select Size...'
+                                className='form-documentType-input'
+                                id='form-documentType-input'
+                                readOnly
+                            />
+                            <label 
+                                htmlFor='form-documentType-input'
+                            />
+                            <ul className={documentTypeDropdownActiveToggler ? 'form-documentType-dropdownOptions active' : 'form-documentType-dropdownOptions'}>
+                                {documentTypeItems.map( (items, index) => {
+                                    return (
+                                        <li 
+                                            key={index}
+                                            id={items.id}
+                                            className={items.id}
+                                            onClick={ () => revealItems(items.name)}
+                                        >
+                                            {items.name}
+                                        </li>
+                                    )
+                                })}
 
-           
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <button
+                        onClick={navigateSteps}
+                        className='form-next-btn'
+                    >
+                        Next
+                    </button>
+                </div>
+            
+                <div className='form-steps'>
+
+                    <div 
+                        className='form-documentCategory-parent-container'
+                        onClick={documentCategoryShowDropdownOptionsHandler}
+                    >
+                        <h3>Select Category...</h3>
+                        <div className='form-documentCategory'>
+
+                            <input 
+                                placeholder='Select Category...'
+                                className='form-documentCategory-input'
+                                id='form-documentCategory-input'
+                                readOnly
+                            />
+                            <label 
+                                htmlFor='form-documentCategory-input'
+                            />
+                            <ul className={documentCategoryDropdownActiveToggler ? 'form-documentCategory-dropdownOptions active' : 'form-documentCategory-dropdownOptions'}>
+                                {documentCategoryItems.map( (items, index) => {
+                                    return (
+                                        <li 
+                                            key={index}
+                                            id={items.id}
+                                            className={items.id}
+                                            onClick={ () => revealCategoryItems(items.name)}
+                                        >
+                                            {items.name}
+                                        </li>
+                                    )
+                                })}
+
+                            </ul>
+                        </div>
+
+                    </div>
+                    <button
+                        onClick={navigateSteps}
+                        className='form-next-btn'
+                    >
+                        Next
+                    </button>
+                </div>
+
+                <div className='form-steps'>
+
+                    <input 
+                        id='form-email'
+                        className='form-email'
+                        type='email'
+                        maxLength='128'
+                        placeholder='Enter Your Email...'
+                        value={formEmailState}
+                        onChange={emailInputHandler}
+                    />
+                    <label 
+                        htmlFor='form-email'
+                    />
+
+                    <button>
+                        Previous
+                    </button>
+                </div>
+
+            </form>
 
 
-        </form>
+        </section>
     )
 }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-function ProgressBar( /* { complete } */) {
+function ProgressBar( { incrementBar, complete, setComplete }) {
 
     const [ style, setStyle ] = useState({});
-    const [ complete, setComplete ] = useState(10)
+    /* const [ complete, setComplete ] = useState(0) */
 
 
     useEffect( () => {
@@ -16,15 +16,16 @@ function ProgressBar( /* { complete } */) {
 
             setStyle(newProgressStyles);
         }, 100);
-    },[complete] )
+        
+    },[complete, incrementBar] )
 
-    const incrementBar = () => {
+   /*  const incrementBar = () => {
 
         if(complete !== 100) {
-            setComplete(complete + 10)
+            setComplete(complete + 25)
         };
         
-    };
+    }; */
     
 
     return (
@@ -34,10 +35,10 @@ function ProgressBar( /* { complete } */) {
                 {complete}%
             </div>
 
-            <button onClick={incrementBar}>
+            {/* <button onClick={incrementBar}>
 
                 click
-            </button>
+            </button> */}
 
         </section>
 

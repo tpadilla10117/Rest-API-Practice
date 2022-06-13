@@ -54,9 +54,9 @@ const HomePage = () => {
                 </button>                
             </form> */}
 
-            <ProgressBar 
+           {/*  <ProgressBar 
                 complete="50"
-            />
+            /> */}
 
             <Form />
 
