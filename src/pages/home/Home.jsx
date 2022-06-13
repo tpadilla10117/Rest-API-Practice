@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
     PokeCardList,
-    ProgressBar
+    ProgressBar,
+    Form
 } from '../../components/utils';
 
 const HomePage = () => {
@@ -34,7 +35,7 @@ const HomePage = () => {
 
     return (
         <main id="homepage-parent-container">
-            <form className='searchbar-parent-container'>
+            {/* <form className='searchbar-parent-container'>
                 <input
                     type='text'
                     id='searchbar'
@@ -51,18 +52,20 @@ const HomePage = () => {
                 >
                     Search
                 </button>                
-            </form>
+            </form> */}
 
             <ProgressBar 
                 complete="50"
             />
 
+            <Form />
+
         {/* PokeCardList displays a list of  PokeCards: */}
-            <PokeCardList 
+           {/*  <PokeCardList 
                 pokeData={pokeData}
                 setPokeData={setPokeData}
                 pokeDataLocalStorage={pokeDataLocalStorage}
-            />
+            /> */}
             
 
         </main>

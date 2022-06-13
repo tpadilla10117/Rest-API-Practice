@@ -1,0 +1,60 @@
+.form-parent-container {
+    border: 1px solid red;
+    width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        width: 75%;
+        height: 20px;
+        border: 1px solid black;
+    }
+
+    .form-documentType-parent-container {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .form-documentType {
+
+            .form-documentType-input {
+                cursor: pointer;
+                position: relative;
+                outline: none;
+                color: #777582;
+
+                &:focus {
+                    border: 1px solid #C550FF;
+                    color: #1B1A21;
+                }
+            }
+
+            .form-documentType-dropdownOptions {
+
+                display: none;
+                position: absolute;
+                margin: 5px 0 0 0;
+                background-color: #FFFFFF;
+                border: 1px #E6E5EA;
+                border-radius: 4px;
+                width: 400px;
+                min-width: 160px;
+                overflow: auto;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                color: black;
+
+                li {
+                    text-decoration: none;
+                    list-style: none;
+                }
+            }
+        }
+        
+    }
+
+    
+}
