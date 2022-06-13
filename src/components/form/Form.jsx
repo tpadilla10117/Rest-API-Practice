@@ -24,6 +24,12 @@ function Form() {
         
     };
 
+    const decrementBar = () => {
+        
+        setProgressBarStatus(progressBarStatus - 25)
+
+    }
+
     const updateFormSteps = () => {
         console.log('fired form update')
         formSteps.forEach( (formstep) => {
@@ -43,6 +49,15 @@ function Form() {
         incrementBar();
         formStepsNum++;
         updateFormSteps();
+    };
+
+    const previousSteps = (event) => {
+        event.preventDefault();
+        console.log('Here is my current Step: ', formStepsNum);
+        console.log('clicked')
+        decrementBar();
+        formStepsNum--;
+        /* updateFormSteps(); */
     };
 
 
@@ -193,6 +208,11 @@ function Form() {
                     >
                         Next
                     </button>
+                    <button
+                        onClick={previousSteps}
+                    >
+                        Previous
+                    </button>
                 </div>
             
                 <div className='form-steps'>
@@ -237,6 +257,11 @@ function Form() {
                     >
                         Next
                     </button>
+                    <button
+                        onClick={previousSteps}
+                    >
+                        Previous
+                    </button>
                 </div>
 
                 <div className='form-steps'>
@@ -254,7 +279,9 @@ function Form() {
                         htmlFor='form-email'
                     />
 
-                    <button>
+                    <button
+                        onClick={previousSteps}
+                    >
                         Previous
                     </button>
                 </div>

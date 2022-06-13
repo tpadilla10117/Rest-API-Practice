@@ -12,6 +12,7 @@ function ProgressBar( { incrementBar, complete, setComplete }) {
                 opacity: 1,
                 width: `${complete}%`,
                 maxWidth: '100%',
+                minWidth: '0%'
             }
 
             setStyle(newProgressStyles);
