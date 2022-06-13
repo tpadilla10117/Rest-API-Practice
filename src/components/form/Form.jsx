@@ -10,12 +10,11 @@ function Form() {
     const [ formEmailState, setFormEmailState ] = useState('');
     const [progressBarStatus, setProgressBarStatus ] = useState(0)
     const [ documentTypeDropdownActiveToggler, setdocumentTypeDropdownActiveToggler ] = useState(false);
+    const [ currentStep, setCurrentStep ] = useState(1);
     const [ documentCategoryDropdownActiveToggler, setdocumentCategoryDropdownActiveToggler ] = useState(false);
 
-    const formSteps = document.querySelectorAll('.form-steps');
-    /* const nextButtons = document.querySelectorAll('.form-next-btn') */
-    let formStepsNum = 0;
 
+/* Functions to increment / decrement progressBar based on step number:  */
     const incrementBar = () => {
 
         if(progressBarStatus !== 100) {
@@ -30,34 +29,23 @@ function Form() {
 
     }
 
-    const updateFormSteps = () => {
-        console.log('fired form update')
-        formSteps.forEach( (formstep) => {
-            console.log(formstep)
-            /* console.log(formstep.classList.contains('active')) */
-            formstep.classList.contains('active') &&
-            formstep.classList.remove('active')
-            formSteps[formStepsNum].classList.add('active');
-        })
 
-    };
-
-    const navigateSteps = (event) => {
+/* Functionality for toggling the steps in the progressBar: */
+    const nextSteps = (event) => {
         event.preventDefault();
-        console.log('Here is my current Step: ', formStepsNum);
-        console.log('clicked')
+        let theCurrentStep = currentStep;
+        theCurrentStep = theCurrentStep >= 3 ? 4 : theCurrentStep + 1;
+        setCurrentStep(theCurrentStep);
         incrementBar();
-        formStepsNum++;
-        updateFormSteps();
     };
+    console.log('my current step: ', currentStep)
 
     const previousSteps = (event) => {
         event.preventDefault();
-        console.log('Here is my current Step: ', formStepsNum);
-        console.log('clicked')
+        let theCurrentStep = currentStep;
+        theCurrentStep = theCurrentStep <= 2 ? 1 : theCurrentStep - 1;
+        setCurrentStep(theCurrentStep);
         decrementBar();
-        formStepsNum--;
-        /* updateFormSteps(); */
     };
 
 
@@ -140,11 +128,12 @@ function Form() {
             />
 
             <form className='form-parent-container'>
-                <div className={`form-steps active`}>
+                <div className={currentStep === 1 ? `form-steps active` : `form-steps `}>
 
                     <input
                         id='form-name'
                         className='form-name'
+                        name='form-name'
                         type='text'
                         minLength='2'
                         maxLength='32'
@@ -157,7 +146,8 @@ function Form() {
                     />
 
                     <button
-                        onClick={navigateSteps}
+                        /* onClick={navigateSteps} */
+                        onClick={nextSteps}
                         className='form-next-btn'
                     >
                         Next
@@ -165,7 +155,7 @@ function Form() {
 
                 </div>
                 
-                <div className='form-steps'>
+                <div className={currentStep === 2 ? `form-steps active` : `form-steps `}>
 
                     <div 
                         className='form-documentType-parent-container'
@@ -178,6 +168,7 @@ function Form() {
                                 placeholder='Select Size...'
                                 className='form-documentType-input'
                                 id='form-documentType-input'
+                                name='form-documentType-input'
                                 readOnly
                             />
                             <label 
@@ -203,7 +194,8 @@ function Form() {
                     </div>
 
                     <button
-                        onClick={navigateSteps}
+                        /* onClick={navigateSteps} */
+                        onClick={nextSteps}
                         className='form-next-btn'
                     >
                         Next
@@ -215,7 +207,7 @@ function Form() {
                     </button>
                 </div>
             
-                <div className='form-steps'>
+                <div className={currentStep === 3 ? `form-steps active` : `form-steps `}>
 
                     <div 
                         className='form-documentCategory-parent-container'
@@ -228,6 +220,7 @@ function Form() {
                                 placeholder='Select Category...'
                                 className='form-documentCategory-input'
                                 id='form-documentCategory-input'
+                                name='form-documentCategory-input'
                                 readOnly
                             />
                             <label 
@@ -252,7 +245,8 @@ function Form() {
 
                     </div>
                     <button
-                        onClick={navigateSteps}
+                        /* onClick={navigateSteps} */
+                        onClick={nextSteps}
                         className='form-next-btn'
                     >
                         Next
@@ -264,7 +258,7 @@ function Form() {
                     </button>
                 </div>
 
-                <div className='form-steps'>
+                <div className={currentStep === 4 ? `form-steps active` : `form-steps `}>
 
                     <input 
                         id='form-email'
