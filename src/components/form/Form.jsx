@@ -5,6 +5,7 @@ function Form(  ) {
 
     const [ formNameState, setFormNameState ] = useState('');
     const [ formEmailState, setFormEmailState ] = useState('');
+    const [ documentTypeDropdownActiveToggler, setdocumentTypeDropdownActiveToggler ] = useState(false);
 
     const nameInputHandler = (event) => {
         setFormNameState(event.target.value)
@@ -15,8 +16,9 @@ function Form(  ) {
     };
 
     const documentTypeShowDropdownOptionsHandler = () => {
-        
+        setdocumentTypeDropdownActiveToggler(!documentTypeDropdownActiveToggler);
     };
+    console.log(documentTypeDropdownActiveToggler)
 
     /* Selects value from the dropdown: */
     const revealItems = (text) => {
@@ -78,7 +80,7 @@ function Form(  ) {
                     <label 
                         htmlFor='form-documentType-input'
                     />
-                    <ul className='form-documentType-dropdownOptions'>
+                    <ul className={documentTypeDropdownActiveToggler ? 'form-documentType-dropdownOptions active' : 'form-documentType-dropdownOptions'}>
                         {documentTypeItems.map( (items, index) => {
                             return (
                                 <li 
