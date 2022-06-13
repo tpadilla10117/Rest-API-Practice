@@ -8,6 +8,8 @@ function Form() {
 
     const [ formNameState, setFormNameState ] = useState('');
     const [ formEmailState, setFormEmailState ] = useState('');
+    const [ formDocumentTypeState, setFormDocumentTypeState ] = useState('');
+    const [ formDocumentCategoryState, setFormDocumentCategoryState ] = useState('');
     const [progressBarStatus, setProgressBarStatus ] = useState(0)
     const [ documentTypeDropdownActiveToggler, setdocumentTypeDropdownActiveToggler ] = useState(false);
     const [ currentStep, setCurrentStep ] = useState(1);
@@ -38,7 +40,6 @@ function Form() {
         setCurrentStep(theCurrentStep);
         incrementBar();
     };
-    console.log('my current step: ', currentStep)
 
     const previousSteps = (event) => {
         event.preventDefault();
@@ -48,7 +49,7 @@ function Form() {
         decrementBar();
     };
 
-
+/* onChange handlers for form inputs & dropdowns: */
     const nameInputHandler = (event) => {
         setFormNameState(event.target.value)
     };
@@ -56,6 +57,14 @@ function Form() {
     const emailInputHandler = (event) => {
         setFormEmailState(event.target.value)
     };
+
+    const documentTypeInputHandler = (event) => {
+        setFormDocumentTypeState(event.target.value);
+    }
+
+    const documentCategoryInputHandler = (event) => {
+        setFormDocumentCategoryState(event.target.value);
+    }
 
     const documentTypeShowDropdownOptionsHandler = () => {
         setdocumentTypeDropdownActiveToggler(!documentTypeDropdownActiveToggler);
@@ -65,11 +74,15 @@ function Form() {
         setdocumentCategoryDropdownActiveToggler(!documentCategoryDropdownActiveToggler);
     };
 
-    /* Selects value from the dropdown: */
+    const submitFormHandler = () => {
+        alert('form submitted')
+    };
+
+/* Selects value from the dropdown: */
     const revealItems = (text) => {
     
         if(text !== null || text !== '') {
-          document.querySelector('.form-documentType-input').value = text;
+          setFormDocumentTypeState(text)
         };
         
     };
@@ -77,7 +90,7 @@ function Form() {
     const revealCategoryItems = (text) => {
     
         if(text !== null || text !== '') {
-          document.querySelector('.form-documentCategory-input').value = text;
+          setFormDocumentCategoryState(text);
         };
         
     };
@@ -146,7 +159,6 @@ function Form() {
                     />
 
                     <button
-                        /* onClick={navigateSteps} */
                         onClick={nextSteps}
                         className='form-next-btn'
                     >
@@ -170,6 +182,8 @@ function Form() {
                                 id='form-documentType-input'
                                 name='form-documentType-input'
                                 readOnly
+                                value={formDocumentTypeState}
+                                onChange={documentCategoryInputHandler}
                             />
                             <label 
                                 htmlFor='form-documentType-input'
@@ -194,16 +208,15 @@ function Form() {
                     </div>
 
                     <button
-                        /* onClick={navigateSteps} */
+                        onClick={previousSteps}
+                    >
+                        Previous
+                    </button>
+                    <button
                         onClick={nextSteps}
                         className='form-next-btn'
                     >
                         Next
-                    </button>
-                    <button
-                        onClick={previousSteps}
-                    >
-                        Previous
                     </button>
                 </div>
             
@@ -222,6 +235,8 @@ function Form() {
                                 id='form-documentCategory-input'
                                 name='form-documentCategory-input'
                                 readOnly
+                                value={formDocumentCategoryState}
+                                onChange={documentTypeInputHandler}
                             />
                             <label 
                                 htmlFor='form-documentCategory-input'
@@ -245,16 +260,15 @@ function Form() {
 
                     </div>
                     <button
-                        /* onClick={navigateSteps} */
+                        onClick={previousSteps}
+                    >
+                        Previous
+                    </button>
+                    <button
                         onClick={nextSteps}
                         className='form-next-btn'
                     >
                         Next
-                    </button>
-                    <button
-                        onClick={previousSteps}
-                    >
-                        Previous
                     </button>
                 </div>
 
@@ -277,6 +291,12 @@ function Form() {
                         onClick={previousSteps}
                     >
                         Previous
+                    </button>
+                    <button
+                        type='submit'
+                        onClick={submitFormHandler}
+                    >
+                        Submit
                     </button>
                 </div>
 
