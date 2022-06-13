@@ -19,3 +19,5 @@
     export { default as PokeCardList } from '../components/pokeCardList/PokeCardList.jsx';
 
     export { default as PokeCards } from '../components/pokeCards/PokeCards.jsx';
+
+    export { default as ProgressBar } from '../components/progressBar/ProgressBar.jsx';

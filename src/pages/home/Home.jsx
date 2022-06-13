@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
-    PokeCardList
+    PokeCardList,
+    ProgressBar
 } from '../../components/utils';
 
 const HomePage = () => {
@@ -51,6 +52,10 @@ const HomePage = () => {
                     Search
                 </button>                
             </form>
+
+            <ProgressBar 
+                complete="50"
+            />
 
         {/* PokeCardList displays a list of  PokeCards: */}
             <PokeCardList 
